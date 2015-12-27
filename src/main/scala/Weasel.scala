@@ -1,5 +1,6 @@
 package com.github.haretaro.weasel
 
+import com.github.haretaro.weasel.role.Villager
 import org.aiwolf.client.base.player.AbstractRoleAssignPlayer
 
 /**
