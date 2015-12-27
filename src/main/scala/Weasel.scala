@@ -1,4 +1,4 @@
-package com.github.haretaro.weasel.role
+package com.github.haretaro.weasel
 
 import org.aiwolf.client.base.player.AbstractRoleAssignPlayer
 
