@@ -10,4 +10,5 @@ class Weasel extends AbstractRoleAssignPlayer{
   
   setVillagerPlayer(new Villager)
   override def getName:String = "Weasel"
+
 }
