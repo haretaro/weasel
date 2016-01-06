@@ -1,17 +1,22 @@
 package com.github.haretaro.weasel.common
 
 import org.aiwolf.client.base.player.AbstractRole
+import org.aiwolf.client.lib.{Topic, Utterance}
+import Topic._
 import org.aiwolf.common.data.{Talk, Agent}
 import org.aiwolf.common.net.{GameSetting, GameInfo}
+import scala.collection.convert.WrapAsScala._
 
 trait BasePlayer extends AbstractRole{
 
   var readTalkNum = 0
   var readWhisperNum = 0
-  var votemap = Map.empty[Agent,Option[Agent]]
+  var voteMap = Map.empty[Agent,Agent]
 
   /** 生きているエージェントのリストを取得 */
-  def aliveAgents = getGameInfo(getDay).getAliveAgentList
+  def aliveAgents = gameInfo.getAliveAgentList
+
+  def gameInfo = getGameInfo(getDay)
 
   override def initialize(gameInfo:GameInfo, gameSetting:GameSetting):Unit = {
   }
@@ -23,7 +28,14 @@ trait BasePlayer extends AbstractRole{
 
   override def update(gameInfo:GameInfo):Unit = {
     val talks = gameInfo.getTalkList
-    talks.drop(readTalkNum).foreach(t => println(t.getIdx))
+    talks.drop(readTalkNum).foreach(t=>{
+      val utterance = new Utterance(t.getContent)
+      utterance.getTopic match{
+        case DIVINED => {
+          println("hogehoge")
+        }
+      }
+    })
     readTalkNum = talks.size
   }
 
