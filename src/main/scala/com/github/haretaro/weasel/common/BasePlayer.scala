@@ -27,13 +27,25 @@ trait BasePlayer extends AbstractRole{
   override def finish:Unit = {}
 
   override def update(gameInfo:GameInfo):Unit = {
+
     val talks = gameInfo.getTalkList
+
     talks.drop(readTalkNum).foreach(t=>{
+
       val utterance = new Utterance(t.getContent)
+
       utterance.getTopic match{
-        case DIVINED => {
-          println("hogehoge")
+
+        case VOTE => {
+          val agent = t.getAgent
+          val target = utterance.getTarget
+          voteMap = voteMap + (agent->target)
         }
+
+        case DIVINED => {
+          println("divined")
+        }
+
       }
     })
     readTalkNum = talks.size
