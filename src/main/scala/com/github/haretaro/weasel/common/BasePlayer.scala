@@ -46,6 +46,8 @@ trait BasePlayer extends AbstractRole{
           println("divined")
         }
 
+        case _ =>
+
       }
     })
     readTalkNum = talks.size
