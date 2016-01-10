@@ -6,6 +6,4 @@ lazy val roleClass = "com.github.haretaro.weasel.Weasel"
 
 lazy val villager = taskKey[Unit]("play as villager")
 
-villager := {
-  val _ = (runMain in Compile).toTask(" org.aiwolf.server.bin.RoleRequestStarter -n 16 -c "+roleClass + " VILLAGER").value
-}
+villager := (runMain in Compile).toTask(" org.aiwolf.server.bin.RoleRequestStarter -n 16 -c "+roleClass + " VILLAGER").value
