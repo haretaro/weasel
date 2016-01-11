@@ -26,6 +26,17 @@ trait BasePlayer extends AbstractRole{
 
   override def finish:Unit = {}
 
+  //得票数の一番多いエージェントを返す
+  def majorityOpinion: Option[Agent] = voteMap
+    .values
+    .groupBy(a=>a).map{
+      case (k,v) => (k,v.size)
+    }
+    .toSeq.sortBy(_._2) match{
+      case (k,v) :: _ => Some(k)
+      case _ => None
+    }
+
   override def update(gameInfo:GameInfo):Unit = {
 
     val talks = gameInfo.getTalkList
