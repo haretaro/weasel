@@ -3,8 +3,13 @@ package com.github.haretaro.weasel.informationManagement
 import org.aiwolf.common.net.GameInfo
 
 /**
-  * Created by Haretaro on 2016/02/24.
+  * このトレイトを継承したクラスで情報を管理する
+  * @author Haretaro
   */
 trait InformationManager {
+
+  /**
+    * updateの時にBasePlayerクラスが呼ぶメソッド
+    */
   def update(gameInfo: GameInfo): Unit
 }

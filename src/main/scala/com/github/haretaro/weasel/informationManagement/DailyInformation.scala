@@ -6,9 +6,11 @@ import org.aiwolf.common.net.GameInfo
 import scala.collection.convert.WrapAsScala._
 
 /**
-  * Created by Haretaro on 2016/02/24.
+  * 一日毎の情報を管理するクラス
+  * @author Haretaro
   */
 class DailyInformation extends InformationManager {
+  //TODO: 日付が変わっていたら自分で初期化させる
 
   var readTalkNum = 0
   var votes = Set.empty[Vote]

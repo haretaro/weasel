@@ -1,25 +1,32 @@
 package com.github.haretaro.weasel.role
 
+import com.github.haretaro.weasel.informationManagement.{GameInformation, DailyInformation}
 import org.aiwolf.client.base.player.AbstractRole
-import org.aiwolf.client.lib.Topic._
-import org.aiwolf.client.lib.{Topic, Utterance}
-import org.aiwolf.common.data.Agent
 import org.aiwolf.common.net.{GameInfo, GameSetting}
 
-import scala.collection.convert.WrapAsScala._
 
+/**
+  * @author Haretaro
+  */
 trait BasePlayer extends AbstractRole{
 
-  /** 生きているエージェントのリストを取得 */
-  def aliveAgents = gameInfo.getAliveAgentList
+  var dailyInformation = new DailyInformation
+  var gameInformation = new GameInformation
 
-  override def initialize(gameInfo:GameInfo, gameSetting:GameSetting):Unit = {
+  override def initialize(gameInfo: GameInfo, gameSetting: GameSetting): Unit = {
+    dailyInformation = new DailyInformation
+    gameInformation = new GameInformation
   }
 
-  override def dayStart:Unit = {
+  override def dayStart(): Unit = {
+    dailyInformation = new DailyInformation
   }
 
-  override def finish:Unit = {}
+  override def finish: Unit = ()
 
-  override def update(gameInfo:GameInfo):Unit = {}
+  override def update(gameInfo: GameInfo): Unit = {
+    dailyInformation.update(gameInfo)
+    gameInformation.update(gameInfo)
+  }
+
 }
