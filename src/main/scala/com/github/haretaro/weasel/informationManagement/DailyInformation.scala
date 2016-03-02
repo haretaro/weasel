@@ -10,7 +10,6 @@ import scala.collection.convert.WrapAsScala._
   * @author Haretaro
   */
 class DailyInformation extends InformationManager {
-  //TODO: 日付が変わっていたら自分で初期化させる
 
   var readTalkNum = 0
   var votes = Set.empty[Vote]
@@ -21,17 +20,17 @@ class DailyInformation extends InformationManager {
       .filter(t => t.getDay == gameInfo.getDay)
       .foreach(t => listen(t))
     readTalkNum = talks.size
-  }
 
-  def listen(talk: Talk): Unit = {
-    val utterance = new Utterance(talk.getContent)
-    utterance.getTopic match{
-      case Topic.VOTE => {
-        val vote = Vote(talk.getAgent, utterance.getTarget)
-        votes.find(v => v.from.equals(talk.getAgent)).foreach(v => votes = votes - v)
-        votes = votes + vote
+    def listen(talk: Talk): Unit = {
+      val utterance = new Utterance(talk.getContent)
+      utterance.getTopic match{
+        case Topic.VOTE => {
+          val vote = Vote(talk.getAgent, utterance.getTarget)
+          votes.find(v => v.from.equals(talk.getAgent)).foreach(v => votes = votes - v)
+          votes = votes + vote
+        }
+        case _ =>
       }
-      case _ =>
     }
   }
 
