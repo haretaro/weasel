@@ -2,6 +2,7 @@ package com.github.haretaro.weasel.role
 
 import com.github.haretaro.weasel.informationManagement.{GameInformation, DailyInformation}
 import org.aiwolf.client.base.player.AbstractRole
+import org.aiwolf.common.data.Agent
 import org.aiwolf.common.net.{GameInfo, GameSetting}
 
 
@@ -10,9 +11,8 @@ import org.aiwolf.common.net.{GameInfo, GameSetting}
   */
 trait BasePlayer extends AbstractRole{
 
-  var dailyInformation = new DailyInformation
-  var gameInformation = new GameInformation
-  var informationManagers = dailyInformation :: gameInformation :: Nil
+  var dailyInformation: DailyInformation = null
+  var gameInformation: GameInformation = null
 
   override def dayStart(): Unit = {
     dailyInformation = new DailyInformation
@@ -22,11 +22,12 @@ trait BasePlayer extends AbstractRole{
 
   override def initialize(gameInfo: GameInfo, gameSetting: GameSetting): Unit = {
     dailyInformation = new DailyInformation
-    gameInformation = new GameInformation
+    gameInformation = GameInformation(gameInfo.getAgent)
   }
 
   override def update(gameInfo: GameInfo): Unit = {
-    informationManagers.foreach(_.update(gameInfo))
+    dailyInformation.update(gameInfo)
+    gameInformation.update(gameInfo)
   }
 
 }

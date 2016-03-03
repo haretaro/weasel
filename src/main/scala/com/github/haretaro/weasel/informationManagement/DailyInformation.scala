@@ -13,6 +13,7 @@ class DailyInformation extends InformationManager {
 
   var readTalkNum = 0
   var votes = Set.empty[Vote]
+  var dateLastUpdated = 0
 
   override def update(gameInfo: GameInfo) = {
     val talks = gameInfo.getTalkList

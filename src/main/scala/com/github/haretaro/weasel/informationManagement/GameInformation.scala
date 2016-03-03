@@ -8,7 +8,7 @@ import scala.collection.convert.WrapAsScala._
 /**
   * @author Haretaro
   */
-class GameInformation extends InformationManager{
+case class GameInformation(val me: Agent) extends InformationManager{
 
   /**
     * 噛まれて死んだエージェント
